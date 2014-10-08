@@ -1,6 +1,58 @@
 module PbcoreExport
-  def to_pbcore_xml
-    doc = ExportPbcoreDatastream.new
+
+  DocumentNodes = [
+      "pbcoreAssetType",
+      "pbcoreAssetDate",
+      "pbcoreIdentifier",
+      "pbcoreTitle",
+      "pbcoreSubject",
+      "pbcoreDescription",
+      "pbcoreGenre",
+      "pbcoreRelation",
+      "pbcoreCoverage",
+      "pbcoreAudienceLevel",
+      "pbcoreAudienceRating",
+      "pbcoreCreator",
+      "pbcoreContributor",
+      "pbcorePublisher",
+      "pbcoreRightsSummary",
+      "pbcoreInstantiation",
+      "pbcoreAnnotation",
+      "pbcorePart",
+      "pbcoreExtension",
+  ]
+
+  InstantiationNodes = [
+      "instantiationIdentifier",
+      "instantiationDate",
+      "instantiationDimensions",
+      "instantiationPhysical",
+      "instantiationDigital",
+      "instantiationStandard",
+      "instantiationLocation",
+      "instantiationMediaType",
+      "instantiationGenerations",
+      "instantiationFileSize",
+      "instantiationTimeStart",
+      "instantiationDuration",
+      "instantiationDataRate",
+      "instantiationColors",
+      "instantiationTracks",
+      "instantiationChannelConfiguration",
+      "instantiationLanguage",
+      "instantiationAlternativeModes",
+      "instantiationEssenceTrack",
+      "instantiationRelation",
+      "instantiationRights",
+      "instantiationAnnotation",
+      "instantiationPart",
+      "instantiationExtension",
+  ]
+
+
+
+  def to_pbcore_xml_orig
+    doc = Nokogiri::XML::Builder.new
     title.each do |t|
       doc.title(t.title_type, t.value)
     end

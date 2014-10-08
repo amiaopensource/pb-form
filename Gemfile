@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'hydra-pbcore', '~> 3.3.1'
-gem 'mediashelf-loggable', '~> 0.4.10'
+gem 'nokogiri', '~> 1.6.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.6'
