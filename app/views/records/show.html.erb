@@ -1,0 +1,7 @@
+<% available_fields.each do |field_name| %>
+  <p>
+    <b><%= field_name.to_s %>:</b>
+    <%= @record.send(field_name) %>
+  </p>
+<% end %>
+
