@@ -1,4 +1,4 @@
-<% available_fields.each do |field_name| %>
+<% @record.terms_for_input.each do |field_name| %>
   <p>
     <b><%= field_name.to_s %>:</b>
     <%= @record.send(field_name) %>

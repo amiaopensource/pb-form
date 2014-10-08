@@ -1,5 +1,5 @@
 class RecordsController < ApplicationController
-  helper_method :available_fields
+
 
   respond_to :html
 
@@ -21,21 +21,11 @@ class RecordsController < ApplicationController
 
   def show
     @record = Record.find(params[:id])
-    t = 1
-  end
 
-  def available_fields
-    [
-      :program_title,
-      :series_title,
-      :supplied_title,
-      :alternative_title,
-      :episode_title,
-      :clip_title,
-      :asset_type,
-      :unique_id,
-      :unique_id_source
-    ]
+    respond_to do |format|
+      format.html { @record }
+      format.xml  { render xml: @record.to_pbcore_xml }
+    end
   end
 
   private
