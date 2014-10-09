@@ -1,0 +1,11 @@
+<%= form_for @record do |f| %>
+
+  <% Record::terms_for_input.each do |field_name| %>
+    <p>
+      <%= f.label field_name %>:
+      <%= f.text_field field_name %>
+    </p>
+  <% end %>
+
+  <br/><%= f.submit %>
+<% end %>

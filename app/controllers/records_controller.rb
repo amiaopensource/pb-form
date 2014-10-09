@@ -8,11 +8,6 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = Record.new(params)
-     @record
-  end
-
-  def create
     @record = Record.new(record_params)
 
     @record.save
@@ -27,6 +22,21 @@ class RecordsController < ApplicationController
       format.pbcore  { render xml: @record.to_pbcore_xml }
     end
   end
+
+  def edit
+    @record = Record.find(params[:id])
+  end
+
+  def update
+    @record = Record.find(params[:id])
+    if @record.update(record_params)
+      redirect_to @record
+    else
+      render :edit
+    end
+  end
+
+
 
   private
 
