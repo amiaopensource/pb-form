@@ -24,7 +24,7 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       format.html { @record }
-      format.xml  { render xml: @record.to_pbcore_xml }
+      format.pbcore  { render xml: @record.to_pbcore_xml }
     end
   end
 
