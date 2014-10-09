@@ -13,17 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20141009040647) do
 
-  create_table "metadata", force: true do |t|
-    t.string   "title"
-    t.text     "description"
-    t.string   "creator"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "records", force: true do |t|
-    t.string   "title"
-    t.text     "description"
     t.string   "creator"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -36,6 +26,7 @@ ActiveRecord::Schema.define(version: 20141009040647) do
     t.string   "asset_type"
     t.string   "unique_id"
     t.string   "unique_id_source"
+    t.text     "description"
     t.string   "description_type"
     t.string   "description_source"
     t.string   "description_reference"
