@@ -1,45 +1,11 @@
 <%= form_for @record do |f| %>
 
-  <p><h4>Titles</h4>
-  <p>
-    <%= f.label :program_title %>:
-    <%= f.text_field :program_title %>
-  </p>
-  <p>
-    <%= f.label :series_title %>:
-    <%= f.text_field :series_title %>
-  </p>
-  <p>
-    <%= f.label :supplied_title %>:
-    <%= f.text_field :supplied_title %>
-  </p>
-  <p>
-    <%= f.label :alternative_title %>:
-    <%= f.text_field :alternative_title %>
-  </p>
-  <p>
-    <%= f.label :episode_title %>:
-    <%= f.text_field :episode_title %>
-  </p>
-  <p>
-    <%= f.label :clip_title %>:
-    <%= f.text_field :clip_title %>
-  </p>
-
-  <p>
-    <%= f.label :asset_type %>:
-    <%= f.text_field :asset_type %>
-  </p>
-
-  <p>
-    <%= f.label :unique_id %>:
-    <%= f.text_field :unique_id %>
-  </p>
-  <p>
-    <%= f.label :unique_id_source %>:
-    <%= f.text_field :unique_id_source %>
-  </p>
-
+  <% Record::terms_for_input.each do |field_name| %>
+    <p>
+      <%= f.label field_name %>:
+      <%= f.text_field field_name %>
+    </p>
+  <% end %>
 
   <br/><%= f.submit %>
 <% end %>

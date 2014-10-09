@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141008162359) do
+ActiveRecord::Schema.define(version: 20141009040647) do
 
   create_table "metadata", force: true do |t|
     t.string   "title"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20141008162359) do
     t.string   "asset_type"
     t.string   "unique_id"
     t.string   "unique_id_source"
+    t.string   "description_type"
+    t.string   "description_source"
+    t.string   "description_reference"
+    t.text     "subject"
+    t.string   "subject_type"
+    t.string   "subject_source"
+    t.string   "subject_reference"
   end
 
 end

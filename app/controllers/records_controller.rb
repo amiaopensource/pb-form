@@ -31,6 +31,6 @@ class RecordsController < ApplicationController
   private
 
   def record_params
-    params.require(:record).permit( available_fields )
+    params.require(:record).permit( Record::terms_for_input )
   end
 end
