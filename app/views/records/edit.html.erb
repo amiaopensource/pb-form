@@ -1,12 +1,15 @@
-<%= form_for @record do |f| %>
+<div class="row"><h2 class="col-md-2 text-right">Edit Metadata: </h2><h3 class="col-md-4"> record:<%= @record.id %>  </h3> </div>
+
+<%= form_for( @record, :html => { :class => "form-horizontal" } ) do |f| %>
 
   <% Record::terms_for_input.each do |field_name| %>
-    <p>
-      <%= f.label field_name %>:
-      <%= f.text_field field_name %>
-    </p>
+    <div class="form-group">
+      <%= f.label field_name, class: "control-label col-md-2" %>
+      <div class="col-md-4"><%= f.text_field field_name, class: "form-control" %></div>
+    </div>
   <% end %>
 
-  <br/><%= f.submit %>
+  <div class="col-md-offset-2">
+    <%= f.submit %>   <%= link_to 'Cancel', @record, class: "btn btn-info" %>
+  </div>
 <% end %>
-<p><%= link_to 'Cancel', @record %></p>
