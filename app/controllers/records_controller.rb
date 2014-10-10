@@ -3,6 +3,10 @@ class RecordsController < ApplicationController
 
   respond_to :html
 
+  def index
+    @records = Record.all
+  end
+
   def new
     @record = Record.new
   end
@@ -19,7 +23,8 @@ class RecordsController < ApplicationController
 
     respond_to do |format|
       format.html { @record }
-      format.pbcore  { render xml: @record.to_pbcore_xml }
+      format.pbcore  { render xml: @record.to_pbcore }
+      format.dc {render xml: @record.to_dc }
     end
   end
 

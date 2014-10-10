@@ -24,7 +24,7 @@ class Record < ActiveRecord::Base
   end
 
 
-  def to_pbcore_xml
+  def to_pbcore
     xml = '<?xml version="1.0"?><pbcoreDescriptionDocument xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xsi:schemaLocation="http://www.pbcore.org/PBCore/PBCoreNamespace.html"></pbcoreDescriptionDocument>'
     doc = Nokogiri::XML(xml)
 
@@ -41,6 +41,13 @@ class Record < ActiveRecord::Base
 
     return doc
 
+  end
+
+  def to_dc
+    xml = '<?xml version="1.0"?><emptyDoc>Nothing to show here yet...</emptyDoc>'
+    doc = Nokogiri::XML(xml)
+
+    return doc
   end
 
   def add_node(document, params)
