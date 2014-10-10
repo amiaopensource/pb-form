@@ -1,4 +1,7 @@
-<div class="row"><h2 class="col-md-2 text-right">Edit Metadata: </h2><h3 class="col-md-4"> record:<%= @record.id %>  </h3> </div>
+<%= link_to '<< Home', '/' %><br/><br/>
+
+<div class="row"><div><h2 class="col-md-2 text-right">Edit Metadata</div>
+<div><h2 class="col-md-4">record: <%= @record.id %></div></div>
 
 <%= form_for( @record, :html => { :class => "form-horizontal" } ) do |f| %>
 

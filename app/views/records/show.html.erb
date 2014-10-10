@@ -1,7 +1,7 @@
-<div class="row"><h3 class="col-md-2 text-right">View Metadata: </h3><h4 class="col-md-4"> record:<%= @record.id %>  </h4> </div>
-
-
 <%= link_to '<< Home', '/' %><br/><br/>
+
+<div class="row"><div><h2 class="col-md-2 text-right">View Metadata</div>
+<div><h2 class="col-md-4">record: <%= @record.id %></div></div>
 
 <% Record::terms_for_input.each do |field_name| %>
   <div class="row">
@@ -15,7 +15,6 @@
 <%= link_to 'Show as PBCore', params.merge(format: :pbcore) %><br/>
 <%= link_to 'Show as Dublin Core', params.merge(format: :pbcore) %><br/>
 <br/>
-<%= link_to '<< Home', '/' %>
 <br/>
 <br/>
 <%= button_to "Delete Record", @record, method: :delete %>
