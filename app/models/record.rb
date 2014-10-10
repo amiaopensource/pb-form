@@ -25,7 +25,7 @@ class Record < ActiveRecord::Base
 
 
   def to_pbcore
-    xml = '<?xml version="1.0"?><pbcoreDescriptionDocument xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xsi:schemaLocation="http://www.pbcore.org/PBCore/PBCoreNamespace.html"></pbcoreDescriptionDocument>'
+    xml = '<?xml version="1.0" encoding="UTF-8"?><pbcoreDescriptionDocument xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.pbcore.org/PBCore/PBCoreNamespace.html" xsi:schemaLocation="http://www.pbcore.org/PBCore/PBCoreNamespace.html"></pbcoreDescriptionDocument>'
     doc = Nokogiri::XML(xml)
 
     add_node(doc, parent: 'pbcoreDescriptionDocument', node: 'pbcoreAssetType', content: asset_type)
@@ -44,18 +44,59 @@ class Record < ActiveRecord::Base
   end
 
   def to_dc
-    xml = '<?xml version="1.0"?><emptyDoc>Nothing to show here yet...</emptyDoc>'
+    xml = <<-DOC_END.gsub(/^ {6}/, '')
+      <?xml version="1.0" encoding="UTF-8"?>
+      <metadata
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xmlns:dc="http://purl.org/dc/elements/1.1/"
+          xmlns:dcterms="http://purl.org/dc/terms/">
+      </metadata>
+      DOC_END
+
     doc = Nokogiri::XML(xml)
+
+    add_node(doc, parent: 'metadata', node: 'dc:title', content: main_title)
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: program_title) unless program_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: series_title) unless series_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: supplied_title) unless supplied_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: alternative_title) unless alternative_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: episode_title) unless episode_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dcterms:alternative', content: clip_title) unless clip_title.empty?
+    add_node(doc, parent: 'metadata', node: 'dc:identifier', content: unique_id) unless unique_id.empty?
+    add_node(doc, parent: 'metadata', node: 'dc:description', content: description) unless description.empty?
+    add_node(doc, parent: 'metadata', node: 'dc:subject', content: subject) unless subject.empty?
+
+
+
 
     return doc
   end
 
+  # Add node to xml document for export to pbcore, dc, etc.
   def add_node(document, params)
     pbcore_node = Nokogiri::XML::Node.new(params[:node],document)
     attrs = params[:attributes]
     attrs.each{|k,v| pbcore_node.set_attribute(k,v) } if attrs
     pbcore_node.content = params[:content]
     document.at_css(params[:parent]).add_child(pbcore_node)
+  end
+
+  # Return a preferred title from user supplied titles
+  def main_title
+    title_terms = [
+        :program_title,
+        :series_title,
+        :supplied_title,
+        :alternative_title,
+        :episode_title,
+        :clip_title
+    ]
+
+    title_candidates = []
+    title_terms.each {|term| title_candidates << self.send(term)}
+
+    title_candidates.reject{|x| x.nil?}.first
+
   end
 
 end
