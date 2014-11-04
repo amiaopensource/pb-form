@@ -95,7 +95,7 @@ class Record < ActiveRecord::Base
     title_candidates = []
     title_terms.each {|term| title_candidates << self.send(term)}
 
-    title_candidates.reject{|x| x.nil?}.first
+    title_candidates.reject{|x| x.empty?}.first
 
   end
 

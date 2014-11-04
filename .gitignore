@@ -17,7 +17,8 @@
 
 # Ignore production config files
 /config/database.yml
-/config/secrets.yml
+# need to have secrets.yml in git for heroku
+# /config/secrets.yml
 
 # Ignore local version file
 .versions.conf
